@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Predictor</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M3 4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V6.58579C21 6.851 20.8946 7.10536 20.7071 7.29289L15 13V20L9 22V13L3.29289 7.29289C3.10536 7.10536 3 6.851 3 6.58579V4Z"
+                        fill="#a1aabf" />
+                </svg>
+                <span>LeadPredictor</span>
+            </div>
+
+            <div class="input-group">
+                <label>Language</label>
+                <div class="input-wrapper select-wrapper">
+                    <span>🇺🇸 English</span>
+                    <i>▼</i>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Currency</label>
+                <div class="input-wrapper select-wrapper">
+                    <span>$ US Dollar</span>
+                    <i>▼</i>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Campaign Start</label>
+                <div class="input-wrapper">
+                    <input type="text" value="08-May-2026" readonly>
+                    <i>📅</i>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Campaign End</label>
+                <div class="input-wrapper">
+                    <input type="text" value="04-Nov-2026" readonly>
+                    <i>📅</i>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Total Revenue</label>
+                <div class="input-wrapper prepended">
+                    <span class="prefix">$</span>
+                    <input type="number" id="total-revenue" value="10000">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Avg. Order Value</label>
+                <div class="input-wrapper prepended">
+                    <span class="prefix">$</span>
+                    <input type="number" id="avg-order-value" value="1000">
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="top-row">
+                <!-- Chart Area -->
+                <div class="panel chart-panel">
+                    <canvas id="predictionChart"></canvas>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-column">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div><span class="icon">📁</span> Prospects</div>
+                            <div class="stat-pct">100%</div>
+                        </div>
+                        <div class="stat-value" id="val-prospects">125</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div><span class="icon">👤</span> Leads</div>
+                            <div class="stat-pct" id="pct-leads">20%</div>
+                        </div>
+                        <div class="stat-value" id="val-leads">25</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="fill-leads" style="width: 20%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div><span class="icon">🏆</span> Customers</div>
+                            <div class="stat-pct" id="pct-customers">8%</div>
+                        </div>
+                        <div class="stat-value" id="val-customers">10</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="fill-customers" style="width: 8%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sliders Area -->
+            <div class="panel sliders-panel">
+                <div class="slider-group">
+                    <label>Lead Response Rate</label>
+                    <input type="range" id="lead-rate" min="1" max="100" value="40" step="1">
+                    <div class="slider-val" id="val-lead-rate">40.00%</div>
+                </div>
+
+                <div class="slider-group">
+                    <label>Prospect Response Rate</label>
+                    <input type="range" id="prospect-rate" min="1" max="100" value="20" step="1">
+                    <div class="slider-val" id="val-prospect-rate">20.00%</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
