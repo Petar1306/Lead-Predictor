@@ -29,9 +29,9 @@ function calculateData() {
     const prospectRate = parseFloat(prospectRateInput.value) / 100;
 
     // Derived values
-    const customers = Math.round(rev / avgOrder);
-    const leads = Math.round(customers / leadRate);
-    const prospects = Math.round(leads / prospectRate);
+    const customers = Math.ceil(rev / avgOrder);
+    const leads = Math.ceil(customers / leadRate);
+    const prospects = Math.ceil(leads / prospectRate);
 
     // Update DOM texts
     valProspects.textContent = prospects;
