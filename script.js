@@ -30,8 +30,8 @@ function calculateData() {
 
     // Derived values
     const customers = Math.ceil(rev / avgOrder);
-    const leads = Math.ceil(customers / leadRate);
-    const prospects = Math.ceil(leads / prospectRate);
+    const leads = Math.ceil((customers * 100) / parseFloat(leadRateInput.value));
+    const prospects = Math.ceil((leads * 100) / parseFloat(prospectRateInput.value));
 
     // Update DOM texts
     valProspects.textContent = prospects;
