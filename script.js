@@ -3,6 +3,9 @@ const revInput = document.getElementById('total-revenue');
 const avgOrderInput = document.getElementById('avg-order-value');
 const leadRateInput = document.getElementById('lead-rate');
 const prospectRateInput = document.getElementById('prospect-rate');
+const resetBtn = document.getElementById('reset-btn');
+const campaignStartInput = document.getElementById('campaign-start');
+const campaignEndInput = document.getElementById('campaign-end');
 const languageSelect = document.getElementById('language-select');
 const currencySelect = document.getElementById('currency-select');
 const prefixes = document.querySelectorAll('.prefix');
@@ -222,6 +225,19 @@ function updateChart(prospects, leads, customers) {
 // Event Listeners
 [revInput, avgOrderInput, leadRateInput, prospectRateInput].forEach(input => {
     input.addEventListener('input', calculateData);
+});
+
+resetBtn.addEventListener('click', () => {
+    // Reset to defaults
+    revInput.value = 10000;
+    avgOrderInput.value = 1000;
+    leadRateInput.value = 40;
+    prospectRateInput.value = 20;
+    campaignStartInput.value = '2026-05-08';
+    campaignEndInput.value = '2026-11-04';
+
+    // Update visuals and re-calculate
+    calculateData();
 });
 
 // Initial Render
