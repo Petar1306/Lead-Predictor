@@ -23,39 +23,47 @@
             </div>
 
             <div class="input-group">
-                <label>Language</label>
-                <div class="input-wrapper select-wrapper">
-                    <span>🇺🇸 English</span>
-                    <i>▼</i>
+                <label data-i18n="language">Language</label>
+                <div class="input-wrapper select-wrapper" style="padding: 0; position: relative;">
+                    <select id="language-select"
+                        style="width: 100%; height: 100%; padding: 12px 16px; background: transparent; border: none; color: var(--text-main); font-size: 14px; appearance: none; cursor: pointer; outline: none; position: relative; z-index: 1;">
+                        <option value="en" style="background: var(--bg-input);">🇺🇸 English</option>
+                        <option value="bg" style="background: var(--bg-input);">🇧🇬 Български</option>
+                    </select>
+                    <i
+                        style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); pointer-events: none; z-index: 0;">▼</i>
                 </div>
             </div>
 
             <div class="input-group">
-                <label>Currency</label>
-                <div class="input-wrapper select-wrapper">
-                    <span>$ US Dollar</span>
-                    <i>▼</i>
+                <label data-i18n="currency">Currency</label>
+                <div class="input-wrapper select-wrapper" style="padding: 0; position: relative;">
+                    <select id="currency-select"
+                        style="width: 100%; height: 100%; padding: 12px 16px; background: transparent; border: none; color: var(--text-main); font-size: 14px; appearance: none; cursor: pointer; outline: none; position: relative; z-index: 1;">
+                        <option value="USD" style="background: var(--bg-input);">$ US Dollar</option>
+                        <option value="EUR" style="background: var(--bg-input);">€ Euro</option>
+                    </select>
+                    <i
+                        style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); pointer-events: none; z-index: 0;">▼</i>
                 </div>
             </div>
 
             <div class="input-group">
-                <label>Campaign Start</label>
-                <div class="input-wrapper">
-                    <input type="text" value="08-May-2026" readonly>
-                    <i>📅</i>
+                <label data-i18n="campaignStart">Campaign Start</label>
+                <div class="input-wrapper" style="padding-right: 8px;">
+                    <input type="date" id="campaign-start" value="2026-05-08" style="color-scheme: dark;">
                 </div>
             </div>
 
             <div class="input-group">
-                <label>Campaign End</label>
-                <div class="input-wrapper">
-                    <input type="text" value="04-Nov-2026" readonly>
-                    <i>📅</i>
+                <label data-i18n="campaignEnd">Campaign End</label>
+                <div class="input-wrapper" style="padding-right: 8px;">
+                    <input type="date" id="campaign-end" value="2026-11-04" style="color-scheme: dark;">
                 </div>
             </div>
 
             <div class="input-group">
-                <label>Total Revenue</label>
+                <label data-i18n="totalRevenue">Total Revenue</label>
                 <div class="input-wrapper prepended">
                     <span class="prefix">$</span>
                     <input type="number" id="total-revenue" value="10000">
@@ -63,7 +71,7 @@
             </div>
 
             <div class="input-group">
-                <label>Avg. Order Value</label>
+                <label data-i18n="avgOrderValue">Avg. Order Value</label>
                 <div class="input-wrapper prepended">
                     <span class="prefix">$</span>
                     <input type="number" id="avg-order-value" value="1000">
@@ -84,7 +92,7 @@
                 <div class="stats-column">
                     <div class="stat-card">
                         <div class="stat-header">
-                            <div><span class="icon">📁</span> Prospects</div>
+                            <div><span class="icon">📁</span> <span data-i18n="prospects">Prospects</span></div>
                             <div class="stat-pct">100%</div>
                         </div>
                         <div class="stat-value" id="val-prospects">125</div>
@@ -95,7 +103,7 @@
 
                     <div class="stat-card">
                         <div class="stat-header">
-                            <div><span class="icon">👤</span> Leads</div>
+                            <div><span class="icon">👤</span> <span data-i18n="leads">Leads</span></div>
                             <div class="stat-pct" id="pct-leads">20%</div>
                         </div>
                         <div class="stat-value" id="val-leads">25</div>
@@ -106,7 +114,7 @@
 
                     <div class="stat-card">
                         <div class="stat-header">
-                            <div><span class="icon">🏆</span> Customers</div>
+                            <div><span class="icon">🏆</span> <span data-i18n="customers">Customers</span></div>
                             <div class="stat-pct" id="pct-customers">8%</div>
                         </div>
                         <div class="stat-value" id="val-customers">10</div>
@@ -120,13 +128,13 @@
             <!-- Sliders Area -->
             <div class="panel sliders-panel">
                 <div class="slider-group">
-                    <label>Lead Response Rate</label>
+                    <label data-i18n="leadResponseRate">Lead Response Rate</label>
                     <input type="range" id="lead-rate" min="1" max="100" value="40" step="1">
                     <div class="slider-val" id="val-lead-rate">40.00%</div>
                 </div>
 
                 <div class="slider-group">
-                    <label>Prospect Response Rate</label>
+                    <label data-i18n="prospectResponseRate">Prospect Response Rate</label>
                     <input type="range" id="prospect-rate" min="1" max="100" value="20" step="1">
                     <div class="slider-val" id="val-prospect-rate">20.00%</div>
                 </div>

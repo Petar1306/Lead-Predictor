@@ -6,6 +6,47 @@ const prospectRateInput = document.getElementById('prospect-rate');
 const resetBtn = document.getElementById('reset-btn');
 const campaignStartInput = document.getElementById('campaign-start');
 const campaignEndInput = document.getElementById('campaign-end');
+const languageSelect = document.getElementById('language-select');
+const currencySelect = document.getElementById('currency-select');
+const prefixes = document.querySelectorAll('.prefix');
+
+// Translations
+const translations = {
+    en: {
+        language: "Language",
+        currency: "Currency",
+        campaignStart: "Campaign Start",
+        campaignEnd: "Campaign End",
+        totalRevenue: "Total Revenue",
+        avgOrderValue: "Avg. Order Value",
+        prospects: "Prospects",
+        leads: "Leads",
+        customers: "Customers",
+        leadResponseRate: "Lead Response Rate",
+        prospectResponseRate: "Prospect Response Rate",
+        xAxisLabel: "0 people           20 people           40 people           60 people           80 people           100 people           120 people",
+        yAxisLabel: "Months",
+        monthPrefix: "Month #"
+    },
+    bg: {
+        language: "Език",
+        currency: "Валута",
+        campaignStart: "Начало на кампанията",
+        campaignEnd: "Край на кампанията",
+        totalRevenue: "Общи приходи",
+        avgOrderValue: "Ср. стойност на поръчката",
+        prospects: "Потенциални клиенти",
+        leads: "Лийдове",
+        customers: "Клиенти",
+        leadResponseRate: "Процент на отговор от лийдове",
+        prospectResponseRate: "Процент на отговор от потенциални клиенти",
+        xAxisLabel: "0 души           20 души           40 души           60 души           80 души           100 души           120 души",
+        yAxisLabel: "Месеци",
+        monthPrefix: "Месец №"
+    }
+};
+
+let currentLang = 'en';
 
 const valProspects = document.getElementById('val-prospects');
 const valLeads = document.getElementById('val-leads');
@@ -32,9 +73,9 @@ function calculateData() {
     const prospectRate = parseFloat(prospectRateInput.value) / 100;
 
     // Derived values
-    const customers = Math.round(rev / avgOrder);
-    const leads = Math.round(customers / leadRate);
-    const prospects = Math.round(leads / prospectRate);
+    const customers = Math.ceil(rev / avgOrder);
+    const leads = Math.ceil((customers * 100) / parseFloat(leadRateInput.value));
+    const prospects = Math.ceil((leads * 100) / parseFloat(prospectRateInput.value));
 
     // Update DOM texts
     valProspects.textContent = prospects;
@@ -63,10 +104,20 @@ function updateChart(prospects, leads, customers) {
     const leadsData = timeDistribution.map(d => Math.round(leads * d));
     const customersData = timeDistribution.map(d => Math.round(customers * d));
 
+    const t = translations[currentLang];
+
     if (chartInstance) {
         chartInstance.data.datasets[0].data = customersData;
         chartInstance.data.datasets[1].data = leadsData;
         chartInstance.data.datasets[2].data = prospectsData;
+
+        // Update Chart Translations
+        chartInstance.data.datasets[0].label = t.customers;
+        chartInstance.data.datasets[1].label = t.leads;
+        chartInstance.data.datasets[2].label = t.prospects;
+        chartInstance.options.scales.x.title.text = t.xAxisLabel;
+        chartInstance.options.scales.y.title.text = t.yAxisLabel;
+
         chartInstance.update();
         return;
     }
@@ -81,7 +132,7 @@ function updateChart(prospects, leads, customers) {
             labels: ['1', '2', '3', '4', '5', '6'],
             datasets: [
                 {
-                    label: 'Customers',
+                    label: t.customers,
                     data: customersData,
                     backgroundColor: '#e2e8f0',     // Lightest
                     grouped: false,
@@ -90,7 +141,7 @@ function updateChart(prospects, leads, customers) {
                     order: 1
                 },
                 {
-                    label: 'Leads',
+                    label: t.leads,
                     data: leadsData,
                     backgroundColor: '#808ea6',     // Medium
                     grouped: false,
@@ -99,7 +150,7 @@ function updateChart(prospects, leads, customers) {
                     order: 2
                 },
                 {
-                    label: 'Prospects',
+                    label: t.prospects,
                     data: prospectsData,
                     backgroundColor: '#5c6784',     // Darkest
                     grouped: false,
@@ -130,7 +181,7 @@ function updateChart(prospects, leads, customers) {
                     callbacks: {
                         title: (items) => {
                             if (!items.length) return '';
-                            return `Month #${items[0].label}`;
+                            return `${translations[currentLang].monthPrefix}${items[0].label}`;
                         },
                         label: (item) => {
                             return `${item.dataset.label}: ${item.raw}`;
@@ -146,7 +197,7 @@ function updateChart(prospects, leads, customers) {
                     },
                     title: {
                         display: true,
-                        text: '0 people           20 people           40 people           60 people           80 people           100 people           120 people',
+                        text: t.xAxisLabel,
                         color: '#e2e8f0',
                         font: { size: 10 }
                     },
@@ -162,7 +213,7 @@ function updateChart(prospects, leads, customers) {
                     },
                     title: {
                         display: true,
-                        text: 'Months',
+                        text: t.yAxisLabel,
                         color: '#e2e8f0'
                     }
                 }
@@ -190,4 +241,36 @@ resetBtn.addEventListener('click', () => {
 });
 
 // Initial Render
-calculateData();
+function updateLanguage() {
+    currentLang = languageSelect.value;
+
+    // Update DOM translations
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) {
+            el.textContent = translations[currentLang][key];
+        }
+    });
+
+    // Trigger calculation to update chart translations
+    calculateData();
+}
+
+function updateCurrency() {
+    const symbols = {
+        'USD': '$',
+        'EUR': '€'
+    };
+    const symbol = symbols[currencySelect.value] || '$';
+
+    prefixes.forEach(prefix => {
+        prefix.textContent = symbol;
+    });
+}
+
+languageSelect.addEventListener('change', updateLanguage);
+currencySelect.addEventListener('change', updateCurrency);
+
+// Initialize
+updateLanguage();
+updateCurrency();
