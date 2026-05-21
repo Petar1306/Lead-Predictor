@@ -4,6 +4,8 @@ const avgOrderInput = document.getElementById('avg-order-value');
 const leadRateInput = document.getElementById('lead-rate');
 const prospectRateInput = document.getElementById('prospect-rate');
 const languageSelect = document.getElementById('language-select');
+const currencySelect = document.getElementById('currency-select');
+const prefixes = document.querySelectorAll('.prefix');
 
 // Translations
 const translations = {
@@ -238,7 +240,21 @@ function updateLanguage() {
     calculateData();
 }
 
+function updateCurrency() {
+    const symbols = {
+        'USD': '$',
+        'EUR': '€'
+    };
+    const symbol = symbols[currencySelect.value] || '$';
+
+    prefixes.forEach(prefix => {
+        prefix.textContent = symbol;
+    });
+}
+
 languageSelect.addEventListener('change', updateLanguage);
+currencySelect.addEventListener('change', updateCurrency);
 
 // Initialize
 updateLanguage();
+updateCurrency();

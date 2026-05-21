@@ -37,9 +37,14 @@
 
             <div class="input-group">
                 <label data-i18n="currency">Currency</label>
-                <div class="input-wrapper select-wrapper">
-                    <span>$ US Dollar</span>
-                    <i>▼</i>
+                <div class="input-wrapper select-wrapper" style="padding: 0; position: relative;">
+                    <select id="currency-select"
+                        style="width: 100%; height: 100%; padding: 12px 16px; background: transparent; border: none; color: var(--text-main); font-size: 14px; appearance: none; cursor: pointer; outline: none; position: relative; z-index: 1;">
+                        <option value="USD" style="background: var(--bg-input);">$ US Dollar</option>
+                        <option value="EUR" style="background: var(--bg-input);">€ Euro</option>
+                    </select>
+                    <i
+                        style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); pointer-events: none; z-index: 0;">▼</i>
                 </div>
             </div>
 
