@@ -239,3 +239,25 @@ input[type=range]::-webkit-slider-runnable-track {
     font-size: 13px;
     color: var(--text-muted);
 }
+
+/* Reset Button */
+.reset-btn {
+    background-color: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-top: 8px;
+}
+
+.reset-btn:hover {
+    background-color: var(--accent-light);
+}
+
+.reset-btn:active {
+    transform: translateY(1px);
+}
