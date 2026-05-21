@@ -176,7 +176,7 @@ function updateChart(prospects, leads, customers) {
                     callbacks: {
                         title: (items) => {
                             if (!items.length) return '';
-                            return `${translations[currentLang].monthPrefix}lations[currentLang].monthPrefix}${items[0].label}`;
+                            return `${translations[currentLang].monthPrefix}${items[0].label}`;
                         },
                         label: (item) => {
                             return `${item.dataset.label}: ${item.raw}`;
